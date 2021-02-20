@@ -4,9 +4,11 @@ const dotenv = require('dotenv');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const contactRouter = require('./routes/contacts');
-
+const connectDB = require('./config/db');
 dotenv.config({ path: './config/config.env' });
 
+//connect databse
+connectDB();
 const PORT = process.env.PORT || 5000;
 
 const app = express();
