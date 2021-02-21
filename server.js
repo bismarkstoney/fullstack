@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const errorhandler = require('./middleware/error');
 const userRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const contactRouter = require('./routes/contacts');
@@ -16,11 +17,13 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
-//mount routes
 
+//mount routes
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/contacts', contactRouter);
 app.use('/api/v1/auth', authRouter);
+//errorhandler
+app.use(errorhandler);
 
 app.listen(PORT, () => {
 	console.log(`The server is running on ${PORT}`);
